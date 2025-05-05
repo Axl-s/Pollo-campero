@@ -6,16 +6,15 @@
   <title>Menú - Pollo Campero</title>
   <link rel="stylesheet" href="estilos.css" />
   <style>
-   body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-image: url('fondo.webp');
-  background-repeat: repeat;
-  background-size: auto;
-  color: #333;
-}
-
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('fondo.webp');
+      background-repeat: repeat;
+      background-size: auto;
+      color: #333;
+    }
 
     .menu-grid {
       display: grid;
@@ -33,7 +32,7 @@
       cursor: pointer;
       background-color: #fff;
       border-radius: 8px;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -41,18 +40,20 @@
     }
 
     .producto img {
-      max-width: 100%; /* Ajustar tamaño de la imagen al 100% del contenedor */
-      height: 200px; /* Altura fija para las imágenes */
-      object-fit: contain; /* Asegura que la imagen se ajuste completamente sin recortarse */
+      max-width: 100%;
+      height: 200px;
+      object-fit: contain;
       border-radius: 8px;
     }
 
     .modal {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.6);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
       justify-content: center;
       align-items: center;
     }
@@ -101,20 +102,52 @@
       margin-top: 0.5rem;
       font-weight: bold;
     }
+
+    /* Estilos responsivos */
+    @media (max-width: 768px) {
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas pequeñas */
+        grid-auto-rows: 250px; /* Altura más pequeña para los cuadros */
+        gap: 1rem; /* Espaciado reducido */
+        padding: 1rem;
+      }
+
+      .producto img {
+        height: 150px; /* Ajustar altura de las imágenes */
+      }
+
+      .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .menu-grid {
+        grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
+        grid-auto-rows: 200px;
+      }
+
+      .producto img {
+        height: 120px; /* Ajustar altura de las imágenes */
+      }
+    }
   </style>
-<header class="header">
-  <div class="container header-content">
-    <div class="logo-nombre">
-      <img src="logo.png" alt="Logo Pollo Campero" class="logo-img" />
-      <h1>Pollo Campero</h1>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo-nombre">
+        <img src="logo.png" alt="Logo Pollo Campero" class="logo-img" />
+        <h1>Pollo Campero</h1>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="activo">Inicio</a>
+        <a href="menu.html">Menú</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
     </div>
-    <nav class="nav">
-      <a href="index.html" class="activo">Inicio</a>
-      <a href="menu.html">Menú</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
-  </div>
-</header>
+  </header>
 
   <main class="main">
     <section class="menu-grid">
@@ -138,7 +171,6 @@
         <p>Q10.00</p>
         <img src="bebida.png" alt="Bebidas" />
       </div>
-      <!-- Nuevos productos -->
       <div class="producto" onclick="abrirModal('Ensalada', 25)">
         <h3>Ensalada</h3>
         <p>Q25.00</p>
