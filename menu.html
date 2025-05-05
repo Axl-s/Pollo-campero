@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menú - Pollo Campero</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <style>
+   body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('fondo.webp');
+  background-repeat: repeat;
+  background-size: auto;
+  color: #333;
+}
+
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+      grid-auto-rows: 300px; /* Altura fija para los cuadros */
+      gap: 1.5rem; /* Espaciado entre los cuadros */
+      padding: 2rem;
+      border-radius: 8px;
+    }
+
+    .producto {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .producto img {
+      max-width: 100%; /* Ajustar tamaño de la imagen al 100% del contenedor */
+      height: 200px; /* Altura fija para las imágenes */
+      object-fit: contain; /* Asegura que la imagen se ajuste completamente sin recortarse */
+      border-radius: 8px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      margin: 0.5rem 0;
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .modal-content button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #e9b400;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .close {
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #total {
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+  </style>
+<header class="header">
+  <div class="container header-content">
+    <div class="logo-nombre">
+      <img src="logo.png" alt="Logo Pollo Campero" class="logo-img" />
+      <h1>Pollo Campero</h1>
+    </div>
+    <nav class="nav">
+      <a href="index.html" class="activo">Inicio</a>
+      <a href="menu.html">Menú</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    <section class="menu-grid">
+      <div class="producto" onclick="abrirModal('Pollo Frito', 35)">
+        <h3>Pollo Frito</h3>
+        <p>Q35.00</p>
+        <img src="Pollo.jpeg" alt="Pollo frito" />
+      </div>
+      <div class="producto" onclick="abrirModal('Camperitos', 28)">
+        <h3>Camperitos</h3>
+        <p>Q28.00</p>
+        <img src="Camperitos.jpg" alt="Camperitos" />
+      </div>
+      <div class="producto" onclick="abrirModal('Hamburguesa', 32)">
+        <h3>Hamburguesa</h3>
+        <p>Q32.00</p>
+        <img src="hamburguesas.jpeg" alt="Hamburguesa" />
+      </div>
+      <div class="producto" onclick="abrirModal('Bebidas', 10)">
+        <h3>Bebidas</h3>
+        <p>Q10.00</p>
+        <img src="bebida.png" alt="Bebidas" />
+      </div>
+      <!-- Nuevos productos -->
+      <div class="producto" onclick="abrirModal('Ensalada', 25)">
+        <h3>Ensalada</h3>
+        <p>Q25.00</p>
+        <img src="ensalada.jpg" alt="Ensalada" />
+      </div>
+      <div class="producto" onclick="abrirModal('Postres', 15)">
+        <h3>Postres</h3>
+        <p>Q15.00</p>
+        <img src="postres.jpg" alt="Postres" />
+      </div>
+      <div class="producto" onclick="abrirModal('Combo Familiar', 85)">
+        <h3>Combo Familiar</h3>
+        <p>Q85.00</p>
+        <img src="ensalada.jpg" alt="Combo Familiar" />
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de Pedido -->
+  <div class="modal" id="modalPedido">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2 id="tituloProducto">Ordenar</h2>
+      <form onsubmit="enviarPedido(event)">
+        <input type="text" id="nombre" placeholder="Tu nombre" required />
+        <input type="number" id="cantidad" placeholder="Cantidad" min="1" value="1" required oninput="calcularTotal()" />
+        <select id="entrega" required>
+          <option value="">Selecciona método de entrega</option>
+          <option value="Para llevar">Para llevar</option>
+          <option value="Domicilio">Domicilio</option>
+        </select>
+        <p id="total">Total: Q0.00</p>
+        <button type="submit">Confirmar Pedido</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let productoSeleccionado = "";
+    let precioProducto = 0;
+
+    function abrirModal(producto, precio) {
+      productoSeleccionado = producto;
+      precioProducto = precio;
+      document.getElementById('tituloProducto').innerText = `Ordenar: ${producto}`;
+      document.getElementById('cantidad').value = 1;
+      document.getElementById('total').innerText = `Total: Q${precioProducto.toFixed(2)}`;
+      document.getElementById('modalPedido').style.display = 'flex';
+    }
+
+    function cerrarModal() {
+      document.getElementById('modalPedido').style.display = 'none';
+      document.getElementById('nombre').value = "";
+      document.getElementById('cantidad').value = 1;
+      document.getElementById('entrega').value = "";
+    }
+
+    function calcularTotal() {
+      const cantidad = parseInt(document.getElementById('cantidad').value);
+      const total = cantidad * precioProducto;
+      document.getElementById('total').innerText = `Total: Q${total.toFixed(2)}`;
+    }
+
+    function enviarPedido(event) {
+      event.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const cantidad = document.getElementById('cantidad').value;
+      const metodo = document.getElementById('entrega').value;
+      const total = (cantidad * precioProducto).toFixed(2);
+      alert(`¡Gracias, ${nombre}!\nHas ordenado ${cantidad} x ${productoSeleccionado}.\nMétodo de entrega: ${metodo}\nTotal: Q${total}`);
+      cerrarModal();
+    }
+  </script>
+</body>
+</html>
