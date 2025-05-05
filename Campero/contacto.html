@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto - Pollo Campero</title>
+  <link rel="stylesheet" href="estilos.css">
+  <style>
+
+    main {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .info-contacto p {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+    }
+
+    .formulario-contacto {
+      margin-top: 2rem;
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .formulario-contacto input,
+    .formulario-contacto textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .formulario-contacto button {
+      background-color: #e9b400;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo-nombre">
+        <img src="logo.png" alt="Logo Pollo Campero" class="logo-img" />
+        <h1>Pollo Campero</h1>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="activo">Inicio</a>
+        <a href="menu.html">Menú</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="info-contacto">
+      <p><strong>Teléfono:</strong> 1234-5678</p>
+      <p><strong>Correo:</strong> info@campero.com</p>
+      <p><strong>Dirección:</strong> Guatemala, Ciudad de Guatemala</p>
+    </section>
+
+    <section class="formulario-contacto">
+      <h2>¿Tienes alguna consulta?</h2>
+      <form onsubmit="enviarFormulario(event)">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" required>
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" rows="4" required></textarea>
+
+        <button type="submit">Enviar mensaje</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function enviarFormulario(event) {
+      event.preventDefault();
+      const nombre = document.getElementById("nombre").value;
+      alert(`¡Gracias, ${nombre}! Hemos recibido tu mensaje y te contactaremos pronto.`);
+      // Aquí puedes integrar un envío real usando backend o correo.
+      document.querySelector("form").reset();
+    }
+  </script>
+
+</body>
+</html>
